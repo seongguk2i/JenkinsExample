@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  jenkinsexample:
+    image: ${DOCKER_REGISTRY-}jenkinsexample
+    build:
+      context: .
+      dockerfile: JenkinsExample/Dockerfile
