@@ -7,9 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["JenkinsExample/JenkinsExample.csproj", "JenkinsExample/"]
-RUN dotnet restore "JenkinsExample/JenkinsExample.csproj"
-COPY . .
+COPY ["JenkinsExample.csproj", "/"]
+RUN dotnet restore "JenkinsExample.csproj"
+COPY . .S
 WORKDIR "/src/JenkinsExample"
 RUN dotnet build "JenkinsExample.csproj" -c Release -o /app/build
 
