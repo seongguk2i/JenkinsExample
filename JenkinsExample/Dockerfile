@@ -2,21 +2,35 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["JenkinsExample.csproj", "/"]
-RUN dotnet restore "JenkinsExample/JenkinsExample.csproj"
-COPY . .
-WORKDIR "/src/JenkinsExample"
-RUN dotnet build "JenkinsExample.csproj" -c Release -o /app/build
+COPY *.csproj .
 
-FROM build AS publish
-RUN dotnet publish "JenkinsExample.csproj" -c Release -o /app/publish /p:UseAppHost=false
+FROM dotnet restore
 
-FROM base AS final
+COPY . ./
+
+RUN dotnet publish --no-restore -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:6.0
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "JenkinsExample.dll"]
+
+#EXPOSE 80
+#EXPOSE 443
+#
+#FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+#WORKDIR /src
+#COPY ["JenkinsExample.csproj", "/"]
+#RUN dotnet restore "JenkinsExample/JenkinsExample.csproj"
+#COPY . .
+#WORKDIR "/src/JenkinsExample"
+#RUN dotnet build "JenkinsExample.csproj" -c Release -o /app/build
+#
+#FROM build AS publish
+#RUN dotnet publish "JenkinsExample.csproj" -c Release -o /app/publish /p:UseAppHost=false
+#
+#FROM base AS final
+#WORKDIR /app
+#COPY --from=publish /app/publish .
+#ENTRYPOINT ["dotnet", "JenkinsExample.dll"]
