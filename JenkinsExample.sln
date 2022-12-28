@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JenkinsExample", "JenkinsExample\JenkinsExample.csproj", "{2AE9FC3B-4D2B-4EA3-ABDB-95B6E22CF038}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CA4C095A-CC7A-4448-A98D-4111CD181DDA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{2AE9FC3B-4D2B-4EA3-ABDB-95B6E22CF038}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AE9FC3B-4D2B-4EA3-ABDB-95B6E22CF038}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AE9FC3B-4D2B-4EA3-ABDB-95B6E22CF038}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA4C095A-CC7A-4448-A98D-4111CD181DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA4C095A-CC7A-4448-A98D-4111CD181DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA4C095A-CC7A-4448-A98D-4111CD181DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA4C095A-CC7A-4448-A98D-4111CD181DDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
