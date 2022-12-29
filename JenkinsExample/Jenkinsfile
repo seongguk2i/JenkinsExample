@@ -4,21 +4,18 @@ def region="ap-northeast-2"
 def ecrUrl="834125769529.dkr.ecr.ap-northeast-2.amazonaws.com"
 def repository="test"
 
-node {
+pipeline {
     agent any
 
-     stage('Pull Codes from Github'){
+    stages {
+        stage('Pull Codes from Github'){
             steps{
                 checkout scm
             }
-     }
-     stage('Build image') {
-            app = docker.build("seongguk92/jenkinsexample")
-     }
-     stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'Docker-Hub-ID') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
         }
-     }
+        stage('Build image') {
+            app = docker.build("seongguk92/jenkinsexample")
+        }
+       
+    }
 }
