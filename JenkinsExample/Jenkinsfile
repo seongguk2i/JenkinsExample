@@ -1,22 +1,35 @@
-def mainDir=""
-def ecrLoginHelper="docker-credential-ecr-login"
-def region="ap-northeast-2"
-def ecrUrl="834125769529.dkr.ecr.ap-northeast-2.amazonaws.com"
-def repository="test"
-
-pipeline {
-    agent any
-
-    stages {
-        stage('Pull Codes from Github'){
-            steps{
-                checkout scm
-            }
-        }
-        stage('Build image') {
-            steps{
-                    app = docker.build("seongguk92/jenkinsexample")
-            }
-        }
+pipeline { 
+    environment { 
+        repository = "seongguk92/jenkinsexample"  //docker hub id와 repository 이름
+        DOCKERHUB_CREDENTIALS = credentials('Docker-Hub-ID') // jenkins에 등록해 놓은 docker hub credentials 이름
+        dockerImage = '' 
+  }
+  agent any 
+  stages { 
+      stage('Building our image') { 
+          steps { 
+              script { 
+                  sh "cp /var/lib/jenkins/workspace/seongguk92_jenkins_project/build/libs/sue-member-0.0.1-SNAPSHOT.war /var/lib/jenkins/workspace/pipeline/" // war 파일을 현재 위치로 복사 
+                  dockerImage = docker.build repository + ":$BUILD_NUMBER" 
+              }
+          } 
+      }
+      stage('Login'){
+          steps{
+              sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
+          }
+      }
+      stage('Deploy our image') { 
+          steps { 
+              script {
+                sh 'docker push $repository:$BUILD_NUMBER' //docker push
+              } 
+          }
+      } 
+      stage('Cleaning up') { 
+		  steps { 
+              sh "docker rmi $repository:$BUILD_NUMBER" // docker image 제거
+          }
+      } 
+  }
     }
-}
