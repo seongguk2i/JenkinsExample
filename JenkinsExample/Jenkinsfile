@@ -17,7 +17,7 @@ pipeline {
             app = docker.build("seongguk92/jenkins")
         }
         stage('Push image') {
-            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+            docker.withRegistry('https://registry.hub.docker.com', 'Docker-Hub-ID') {
                 app.push("${env.BUILD_NUMBER}")
                 app.push("latest")
             }
