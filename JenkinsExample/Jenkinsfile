@@ -9,7 +9,6 @@ pipeline {
         stage('Building our image') { 
             steps { 
                 script { 
-                    sh "cp /var/lib/jenkins/workspace/seongguk92_jenkins_project/build/libs/sue-member-0.0.1-SNAPSHOT.war /var/lib/jenkins/workspace/pipeline/" // war 파일을 현재 위치로 복사 
                     dockerImage = docker.build repository + ":$BUILD_NUMBER" 
                 }
             } 
