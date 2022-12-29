@@ -9,10 +9,9 @@ pipeline {
         stage('Building our image') { 
             steps { 
                 script { 
-                    dockerImage = sudo docker.build repository + ":$BUILD_NUMBER" 
+                    dockerImage = docker.build repository + ":$BUILD_NUMBER" 
                 }
             } 
         } 
-
     }
 }
