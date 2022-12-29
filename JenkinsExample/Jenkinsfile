@@ -11,5 +11,17 @@ pipeline {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub ·Î±×ÀÎ
             }
         }
+        stage('Pull Codes from Github'){
+            steps{
+                checkout scm
+            }
+        }
+        stage('Building our image') { 
+        steps { 
+            script { 
+                dockerImage = docker.build repository + ":$BUILD_NUMBER" 
+            }
+        } 
+      }
     }
 }
