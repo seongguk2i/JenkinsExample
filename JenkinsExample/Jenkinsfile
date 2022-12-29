@@ -13,17 +13,13 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build Docker Image & Push to AWS ECR Repository') {
-            steps {
-                withAWS(region:"${region}", credentials:"aws-key") {
-                    ecrLogin()
-                    sh """
-                        curl -O https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/${ecrLoginHelper}
-                        chmod +x ${ecrLoginHelper}
-                        mv ${ecrLoginHelper} /usr/local/bin/
-                        sudo docker build -t jenkinsexample ./JenkinsExample/.
-                    """
-                }
+        stage('Build image') {
+            app = docker.build("seongguk92/jenkins")
+        }
+        stage('Push image') {
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+                app.push("${env.BUILD_NUMBER}")
+                app.push("latest")
             }
         }
     }
