@@ -14,8 +14,9 @@ pipeline {
             }
         }
         stage('Build image') {
-            app = docker.build("seongguk92/jenkinsexample")
+            steps{
+                    app = docker.build("seongguk92/jenkinsexample")
+            }
         }
-       
     }
 }
