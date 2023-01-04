@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "WebApplication11": {
+    "JenkinsExample": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
