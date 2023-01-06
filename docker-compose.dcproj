@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>ca4c095a-cc7a-4448-a98d-4111cd181dda</ProjectGuid>
+    <ProjectGuid>e04495d5-a0e5-4cae-adc4-31b23048cf21</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>jenkinsexample</DockerServiceName>
